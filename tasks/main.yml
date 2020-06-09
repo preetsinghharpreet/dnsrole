@@ -1,0 +1,60 @@
+---
+# task file
+  - name: install utilities
+    yum:
+      name: bind-utils
+      state: present
+
+  - name: configure firewall
+    firewalld:
+      service: dns
+      permanent: yes
+      state: enabled
+      immediate: yes
+
+
+  - name: install bind
+    yum:
+      name: bind
+      state: present
+
+  - name: configure named.conf
+    template:
+      src: named.conf.j2
+      dest: /etc/named.conf
+      owner: root
+      group: named
+      mode: 0640
+
+  - name: generate serial
+    shell: date +%Y%m%d01
+    register: zimbra_serial
+
+  - name: configure forward zone
+    template:
+      src: domain.zone.j2
+      dest: /var/named/{{ zimbra_domain }}.zone
+      owner: root
+      group: named
+      mode: 0640
+
+  - name: configure reverse zone
+    template:
+      src: domain.revzone.j2
+      dest: /var/named/{{ zimbra_domain }}.revzone
+      owner: root
+      group: named
+      mode: 0640
+
+  - name: start and enable named
+    service:
+      name: named
+      state: started
+      enabled: yes
+
+  - name: adding address to resolv.conf file
+    lineinfile:
+      path: /etc/resolv.conf
+      line: 'nameserver 127.0.0.1'
+      insertbefore: 'nameserver'
+      state: present
