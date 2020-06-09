@@ -1,4 +1,4 @@
-ansible-zimbra-single
+ansible-dns
 =====================
 
 This role automates the process of installing DNS server on CentOS 7.
