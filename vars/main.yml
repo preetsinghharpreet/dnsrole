@@ -1,9 +1,9 @@
 ---
-zimbra_fqdn: zimbra.example.com
-zimbra_shortname: zimbra 
-zimbra_ip: 192.168.22.17
-zimbra_reverse_ip: 0.168.192
-zimbra_ptr: 75
-zimbra_subnet: 192.168.0.0/16
-zimbra_forwarders: 8.8.8.8; 8.8.4.4;
-zimbra_domain: example.com
+fqdn: zimbra.example.com
+shortname: zimbra 
+ip: 192.168.22.17
+reverse_ip: 0.168.192
+ptr_ip: 75
+subnet: 192.168.0.0/16
+forwarders: 8.8.8.8; 8.8.4.4;
+domain: example.com

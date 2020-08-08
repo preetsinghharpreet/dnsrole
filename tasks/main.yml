@@ -28,12 +28,12 @@
 
   - name: generate serial
     shell: date +%Y%m%d01
-    register: zimbra_serial
+    register: serial_output
 
   - name: configure forward zone
     template:
       src: domain.zone.j2
-      dest: /var/named/{{ zimbra_domain }}.zone
+      dest: /var/named/{{ domain }}.zone
       owner: root
       group: named
       mode: 0640
@@ -41,7 +41,7 @@
   - name: configure reverse zone
     template:
       src: domain.revzone.j2
-      dest: /var/named/{{ zimbra_domain }}.revzone
+      dest: /var/named/{{ domain }}.revzone
       owner: root
       group: named
       mode: 0640

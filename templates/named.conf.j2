@@ -11,7 +11,7 @@ options {
 	recursion yes;
 
 	forward only;
-	forwarders { {{ zimbra_forwarders }} };
+	forwarders { {{ forwarders }} };
 
 	dnssec-enable yes;
 	dnssec-validation no;
@@ -36,15 +36,15 @@ zone "." IN {
 	file "named.ca";
 };
 
-zone "{{ zimbra_domain }}" IN {
+zone "{{ domain }}" IN {
 	type master;
-	file "{{ zimbra_domain }}.zone";
+	file "{{ domain }}.zone";
 	allow-update { none; };
 };
 
-zone "{{ zimbra_reverse_ip }}.in-addr.arpa" IN {
+zone "{{ reverse_ip }}.in-addr.arpa" IN {
 	type master;
-	file "{{ zimbra_domain }}.revzone";
+	file "{{ domain }}.revzone";
 	allow-update { none; };
 };
 
